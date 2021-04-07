@@ -35,7 +35,8 @@ int main(int argc, char **argv)
 		
 		if (!strcmp(buffer, "exit"))
 			break;
-		
+		token_list = make_tokens(buffer);
+		print_tokens(token_list);
 	}
 
 	free(buffer);
