@@ -1,6 +1,8 @@
 #include "tokenizer.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include "strutils.h"
+
 
 /**
  * new_token - creates a new token structure
@@ -69,11 +71,12 @@ Token *make_tokens(char *src)
 {
 	Token *head = NULL;
 	Token *current_token;
-
 	char *str;
 	char temp[256]; 
 	size_t size = 0;
 	size_t idx;
+	char type = 's';
+	char *builtins[] = {"exit", "env", NULL};
  	
 	while (*src != '\0')
 	{
@@ -99,8 +102,13 @@ Token *make_tokens(char *src)
 
 		str[idx] = '\0';
 		size = 0;
+		
+		if (str_exists(str, builtins))
+			type = 'b';
+		else
+			type = 's';
 
-		current_token = new_token('s', (void *)str);
+		current_token = new_token(type, (void *)str);
 		head = append_token(head, current_token);
 	}
 
