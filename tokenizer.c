@@ -76,7 +76,7 @@ Token *make_tokens(char *src)
 	size_t size = 0;
 	size_t idx;
 	char type = 's';
-	char *builtins[] = {"exit", "env", NULL};
+	char *builtins[] = {"env", NULL};
  	
 	while (*src != '\0')
 	{
@@ -115,6 +115,7 @@ Token *make_tokens(char *src)
 	return (head);
 }
 
+#ifdef DEBUG
 void print_tokens(Token *head)
 {
     Token *next_token = head;
@@ -135,3 +136,4 @@ void print_tokens(Token *head)
         next_token = next_token->next;
     }
 }
+#endif
