@@ -33,7 +33,7 @@ Token *new_token(char type, void *value)
 void free_tokens(Token *head)
 {
     if (head->next != NULL)
-        free_tokens(head->next);
+    	free_tokens(head->next);
     free(head->value);
     free(head);
 }

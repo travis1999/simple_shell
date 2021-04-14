@@ -5,8 +5,9 @@
 #endif
 
 #include "tokenizer.h"
+#include "parser.h"
+
 #include <stdlib.h>
-#include <stdio.h>
 #include <unistd.h>
 #include <string.h>
 
@@ -24,7 +25,7 @@ size_t input(char **buffer, size_t *buffer_size)
 	return (size);
 }
 
-int main(int argc, char **argv)
+int main(int argc, char **argv, char **env)
 {
 	size_t buffer_size = 1024;
 	char *buffer = malloc(buffer_size);
@@ -42,14 +43,27 @@ int main(int argc, char **argv)
 		buffer[b_read - 1] = 0;
 		
 		if (!strcmp(buffer, "exit"))
+		{
+			printf("exiting");
+			free(buffer);
+			exit(0);
 			break;
+		}
 		token_list = make_tokens(buffer);
 
-		#ifdef DEBUG
-		print_tokens(token_list);
-		#endif
+		if (token_list == NULL)
+			continue;
+		else
+		{
+			#ifdef DEBUG
+			print_tokens(token_list);
+			#endif
 
-		free_tokens(token_list);
+			operation *head_op = parse_list(token_list);
+
+			exec_tree(head_op);
+			free_tokens(token_list);
+		}
 	}
 
 	free(buffer);
