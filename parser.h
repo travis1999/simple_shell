@@ -6,18 +6,18 @@
 #include <stdlib.h>
 
 
-typedef struct oparation operation;
+typedef struct operation operation;
 
-typedef struct oparation
+typedef struct operation
 {
 	char **commands;
 	char **temp_ptr;
 	int size;
 	operation *next;
 	void (*function)(char**, int size);
-}oparation;
+}operation;
 
-oparation *parse_list(Token *head);
+operation *parse_list(Token *head);
 void exec_tree(operation *head);
 
 

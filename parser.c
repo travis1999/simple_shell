@@ -6,14 +6,18 @@
 #include <stdio.h>
 #endif
 
-
+/**
+ * parse_list - parses a list of tokens
+ * @head: head of list
+ * Return: returns head of operation
+ */
 operation *parse_list(Token *head)
 {
 	char *builtins[] = {"exec_shell", "env", NULL};
 	void (*func_builtins[])(char **, int size) = {exec_shell, env};
 
 	Token *next_token = head;
-	operation *head_op = malloc(sizeof(oparation));
+	operation *head_op = malloc(sizeof(operation));
 	operation *last_op = head_op;
 	operation *temp_op = NULL;
 

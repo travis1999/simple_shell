@@ -4,7 +4,12 @@
 #include <sys/wait.h>
 #include <stdlib.h>
 
-
+/**
+ * env - env func
+ * @args: args to env
+ * @size: size of env args
+ * Return: None
+ */
 void env(char **args, int size)
 {
 	int i;
@@ -29,6 +34,12 @@ void env(char **args, int size)
 	}
 }
 
+/**
+ * exec_shell - env func
+ * @args: args to env
+ * @size: size of env args
+ * Return: None
+ */
 void exec_shell(char **args, int size)
 {
 	pid_t child_pid;
