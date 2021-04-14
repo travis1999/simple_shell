@@ -1,9 +1,6 @@
 #include "globals.h"
 
-#ifdef DEBUG
 #include <stdio.h>
-#endif
-
 #include "tokenizer.h"
 #include "parser.h"
 
@@ -12,6 +9,12 @@
 #include <string.h>
 
 
+/**
+ * input - gets data from sdtin
+ * @buffer: buffer pointer
+ * @buffer_size: size of buffer
+ * Return: number of bytes read
+ */
 
 size_t input(char **buffer, size_t *buffer_size)
 {
@@ -25,15 +28,23 @@ size_t input(char **buffer, size_t *buffer_size)
 	return (size);
 }
 
-int main(int argc, char **argv, char **env)
+/**
+ * main - entry point
+ * @argc: number of args
+ * @argv: null terminated array of shell args
+ * @env: environment variables
+ * Return: Always Zero (Success)
+ */
+int main(void)
 {
 	size_t buffer_size = 1024;
 	char *buffer = malloc(buffer_size);
 	size_t b_read;
+	int run = 1;
 
 	Token *token_list = NULL;
 
-	while (1)
+	while (run)
 	{
 		b_read = input(&buffer, &buffer_size);
 
@@ -44,10 +55,8 @@ int main(int argc, char **argv, char **env)
 		
 		if (!strcmp(buffer, "exit"))
 		{
-			printf("exiting");
-			free(buffer);
-			exit(0);
 			break;
+			run = 0;
 		}
 		token_list = make_tokens(buffer);
 

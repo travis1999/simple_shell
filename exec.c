@@ -10,7 +10,7 @@
  * @size: size of env args
  * Return: None
  */
-void env(char **args, int size)
+void env(char **args__attribute__((unused)), int size__attribute__((unused)))
 {
 	int i;
 	extern char **environ;
@@ -40,7 +40,7 @@ void env(char **args, int size)
  * @size: size of env args
  * Return: None
  */
-void exec_shell(char **args, int size)
+void exec_shell(char **args, int size__attribute__((unused)))
 {
 	pid_t child_pid;
 	int return_status;

@@ -1,5 +1,5 @@
 #ifndef GLOBALS
+#define GLOBALS
 
-	#define DEBUG
-
+size_t input(char **buffer, size_t *buffer_size);
 #endif

@@ -1,10 +1,21 @@
 #include <unistd.h>
 
+/**
+ * _putchar - prints a character
+ * @c: character to print
+ * Return: number of printed characters
+ */
 int _putchar(char c)
 {
 	return (write(1, &c, 1));
 }
 
+/**
+ * str_comp - string compare
+ * @str0: first string
+ * @str1: second string
+ * Return: 1 if equal 0 otherwise
+ */
 int str_comp(char *str0, char *str1)
 {
 	if (str0 == NULL || str1 == NULL)
@@ -16,6 +27,12 @@ int str_comp(char *str0, char *str1)
 	return (1);
 }
 
+/**
+ * str_cpy - find if string exists in array
+ * @dest: first string
+ * @src: list of strings
+ * Return: 1 if equal 0 otherwise
+ */
 void str_cpy(char *dest, char *src)
 {
 	if (dest == NULL || src == NULL)
@@ -24,6 +41,13 @@ void str_cpy(char *dest, char *src)
 		*dest++ = *src++;
 	*dest = 0;
 }
+
+/**
+ * str_exists - find if string exists in array
+ * @str: first string
+ * @str_list: list of strings
+ * Return: 1 if equal 0 otherwise
+ */
 
 int str_exists(char *str, char **str_list)
 {
@@ -35,6 +59,11 @@ int str_exists(char *str, char **str_list)
 	return (0);
 }
 
+/**
+ * str_len - length of string
+ * @str: string to get length
+ * Return: length of string
+ */
 int str_len(char *str)
 {
 	int count = 0;

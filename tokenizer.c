@@ -1,6 +1,9 @@
 #include "tokenizer.h"
 #include <stdlib.h>
+
+#ifdef DEBUG
 #include <stdio.h>
+#endif
 #include "strutils.h"
 
 
@@ -87,7 +90,9 @@ Token *make_tokens(char *src)
 				src++;
 				break;
 			}
+			#ifdef DEBUG
 			printf("here: %c\n", *src);
+			#endif
 			temp[size] = *src;
 			src++;
 			size++;

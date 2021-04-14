@@ -73,6 +73,10 @@ operation *parse_list(Token *head)
 }
 
 
+/**
+ * exec_tree - executes tree from head operation
+ * @head: start operation
+ */
 void exec_tree(operation *head)
 {	
 	char **temp = head->temp_ptr;
@@ -87,5 +91,5 @@ void exec_tree(operation *head)
 		free(head);
 	}
 
-	//free(temp);
+	/*free(temp);*/
 }
