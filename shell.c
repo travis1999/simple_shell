@@ -1,8 +1,16 @@
+#include "globals.h"
+
+#ifdef DEBUG
+#include <stdio.h>
+#endif
+
 #include "tokenizer.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>
+
+
 
 size_t input(char **buffer, size_t *buffer_size)
 {
@@ -36,7 +44,12 @@ int main(int argc, char **argv)
 		if (!strcmp(buffer, "exit"))
 			break;
 		token_list = make_tokens(buffer);
+
+		#ifdef DEBUG
 		print_tokens(token_list);
+		#endif
+
+		free_tokens(token_list);
 	}
 
 	free(buffer);
