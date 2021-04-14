@@ -30,5 +30,16 @@ int str_exists(char *str, char **str_list)
 			return (1);
 	}
 	return (0);
-	
+}
+
+int str_len(char *str)
+{
+	int count = 0;
+	while (*str)
+	{
+		str++;
+		count++;
+	}
+
+	return (count);
 }
