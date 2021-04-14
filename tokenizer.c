@@ -16,16 +16,16 @@
 
 Token *new_token(char type, void *value)
 {
-    Token *new_token = malloc(sizeof(Token));
+	Token *new_token = malloc(sizeof(Token));
 
-    if (new_token == NULL)
-        return (NULL);
+	if (new_token == NULL)
+		return (NULL);
 
-    new_token->type = type;
-    new_token->value = value;
-    new_token->next = NULL;
+	new_token->type = type;
+	new_token->value = value;
+	new_token->next = NULL;
 
-    return (new_token);
+	return (new_token);
 }
 
 /**
@@ -35,10 +35,10 @@ Token *new_token(char type, void *value)
 
 void free_tokens(Token *head)
 {
-    if (head->next != NULL)
-    	free_tokens(head->next);
-    free(head->value);
-    free(head);
+	if (head->next != NULL)
+		free_tokens(head->next);
+	free(head->value);
+	free(head);
 }
 
 /**
@@ -49,24 +49,24 @@ void free_tokens(Token *head)
  */ 
 Token *append_token(Token *head, Token *new_token)
 {
-    Token *next_token;
+	Token *next_token;
 
-    if (head == NULL)
-        head = new_token;
-    else
-    {
-        next_token = head;
-        while (1)
-        {
-            if (next_token->next == NULL)
-            {
-                next_token->next = new_token;
-                break;
-            }
-            next_token = next_token->next;
-        }
-    }
-    return (head);
+	if (head == NULL)
+		head = new_token;
+	else
+	{
+		next_token = head;
+		while (1)
+		{
+			if (next_token->next == NULL)
+			{
+				next_token->next = new_token;
+				break;
+			}
+			next_token = next_token->next;
+		}
+	}
+	return (head);
 }
 
 
@@ -123,22 +123,22 @@ Token *make_tokens(char *src)
 #ifdef DEBUG
 void print_tokens(Token *head)
 {
-    Token *next_token = head;
+	Token *next_token = head;
 
-    printf("\n\ttokens\n");
+	printf("\n\ttokens\n");
 
-    while (next_token != NULL)
-    {   
-        if (next_token->type == 's')
-            printf("Type: string, Value: %s, addr: %p\n", (char *)(next_token->value), next_token->value);
+	while (next_token != NULL)
+	{
+		if (next_token->type == 's')
+			printf("Type: string, Value: %s, addr: %p\n", (char *)(next_token->value), next_token->value);
 
-        if (next_token->type == 'i')
-            printf("Type: integer, Value: %d, addr: %p\n", *(int *)(next_token->value), next_token->value);
+		if (next_token->type == 'i')
+			printf("Type: integer, Value: %d, addr: %p\n", *(int *)(next_token->value), next_token->value);
 
-        if (next_token->type == 'd')
-            printf("Type: decimal, Value: %lf, addr: %p\n", *(double *)(next_token->value), next_token->value);
+		if (next_token->type == 'd')
+			printf("Type: decimal, Value: %lf, addr: %p\n", *(double *)(next_token->value), next_token->value);
 
-        next_token = next_token->next;
-    }
+		next_token = next_token->next;
+	}
 }
 #endif

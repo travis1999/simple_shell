@@ -10,7 +10,7 @@
  * @size: size of env args
  * Return: None
  */
-void env(char **args__attribute__((unused)), int size__attribute__((unused)))
+void env(char **args __attribute__((unused)), int size __attribute__((unused)))
 {
 	int i;
 	extern char **environ;
@@ -22,14 +22,14 @@ void env(char **args__attribute__((unused)), int size__attribute__((unused)))
 	if (child_pid == 0)
 	{
 		for (i = 0; environ[i] != NULL; i++)
-        	printf("\n%s", environ[i]);
+			printf("\n%s", environ[i]);
 	}
 	else if(child_pid < 0)
 	{
 		perror("fork");
 	}
 	else
-	{      
+	{
 		waitpid(child_pid, &return_status, 0);
 	}
 }
@@ -40,7 +40,7 @@ void env(char **args__attribute__((unused)), int size__attribute__((unused)))
  * @size: size of env args
  * Return: None
  */
-void exec_shell(char **args, int size__attribute__((unused)))
+void exec_shell(char **args, int size __attribute__((unused)))
 {
 	pid_t child_pid;
 	int return_status;
@@ -50,14 +50,14 @@ void exec_shell(char **args, int size__attribute__((unused)))
 	if (child_pid == 0)
 	{
 		if (execve(args[0], args, NULL) == -1)
-        	perror("Error");
+			perror("Error");
 	}
 	else if(child_pid < 0)
 	{
 		perror("fork");
 	}
 	else
-	{      
+	{
 		waitpid(child_pid, &return_status, 0);
 	}
 }

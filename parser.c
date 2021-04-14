@@ -25,7 +25,7 @@ operation *parse_list(Token *head)
 
 	char **temp;
 
-    while (next_token != NULL)
+	while (next_token != NULL)
 	{
 		temp = malloc(sizeof(char **) * 256);
 		while (1)
