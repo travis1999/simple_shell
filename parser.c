@@ -19,15 +19,17 @@ operation *parse_list(Token *head)
 	Token *next_token = head;
 	operation *head_op = malloc(sizeof(operation));
 	operation *last_op = head_op;
-	operation *temp_op = NULL;
 
-	int idx = 0, idy;
+	int idx;
+	int idy;
 
 	char **temp;
 
 	while (next_token != NULL)
 	{
 		temp = malloc(sizeof(char **) * 256);
+		idx = 0;
+
 		while (1)
 		{
 			temp[idx] = malloc(str_len((char *)next_token->value) + 1);
@@ -79,9 +81,8 @@ operation *parse_list(Token *head)
  */
 void exec_tree(operation *head)
 {	
-	char **temp = head->temp_ptr;
-	int idx = 0;
-	
+	/*char **temp = head->temp_ptr;*/
+	/*int idx = 0;*/
 
 	while (head != NULL)
 	{

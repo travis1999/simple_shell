@@ -2,13 +2,12 @@
 #define TOKENIZER_H
 #include "globals.h"
 
-typedef struct Token Token;
 
 typedef struct Token
 {
 	char type;
 	void *value;
-	Token *next;
+	struct Token *next;
 }Token;
 
 

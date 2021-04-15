@@ -49,7 +49,7 @@ int main(void)
 	{
 		b_read = input(&buffer, &buffer_size);
 
-		if (b_read == -1)
+		if ((int)b_read == -1)
 			break;
 
 		buffer[b_read - 1] = 0;
