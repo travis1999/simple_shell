@@ -23,7 +23,6 @@ size_t input(char **buffer, size_t *buffer_size)
 	size_t size;
 
 	write(1, prompt, 4);
-	
 	size = getline(buffer, buffer_size, stdin);
 
 	return (size);
@@ -31,9 +30,6 @@ size_t input(char **buffer, size_t *buffer_size)
 
 /**
  * main - entry point
- * @argc: number of args
- * @argv: null terminated array of shell args
- * @env: environment variables
  * Return: Always Zero (Success)
  */
 int main(void)
@@ -53,7 +49,6 @@ int main(void)
 			break;
 
 		buffer[b_read - 1] = 0;
-		
 		if (!strcmp(buffer, "exit"))
 		{
 			break;

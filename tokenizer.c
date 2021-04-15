@@ -46,7 +46,7 @@ void free_tokens(Token *head)
  * @head: head of the list
  * @new_token: token to be added to linked list
  * Return: none
- */ 
+ */
 Token *append_token(Token *head, Token *new_token)
 {
 	Token *next_token;
@@ -75,12 +75,12 @@ Token *make_tokens(char *src)
 	Token *head = NULL;
 	Token *current_token;
 	char *str;
-	char temp[256]; 
+	char temp[256];
 	size_t size = 0;
 	size_t idx;
 	char type = 's';
 	char *builtins[] = {"env", NULL};
- 	
+
 	while (*src != '\0')
 	{
 		while (*src != '\0')
@@ -90,29 +90,21 @@ Token *make_tokens(char *src)
 				src++;
 				break;
 			}
-			#ifdef DEBUG
-			printf("here: %c\n", *src);
-			#endif
 			temp[size] = *src;
 			src++;
 			size++;
 		}
-		
 		str = malloc(size + 1);
-		
 		for (idx = 0; idx < size; idx++)
 		{
 			str[idx] = temp[idx];
 		}
-
 		str[idx] = '\0';
 		size = 0;
-		
 		if (str_exists(str, builtins))
 			type = 'b';
 		else
 			type = 's';
-
 		current_token = new_token(type, (void *)str);
 		head = append_token(head, current_token);
 	}
@@ -121,6 +113,11 @@ Token *make_tokens(char *src)
 }
 
 #ifdef DEBUG
+/**
+ * print_tokens -prints the tokens
+ * @head: start of list
+ * Return: None
+ */
 void print_tokens(Token *head)
 {
 	Token *next_token = head;
@@ -130,13 +127,16 @@ void print_tokens(Token *head)
 	while (next_token != NULL)
 	{
 		if (next_token->type == 's')
-			printf("Type: string, Value: %s, addr: %p\n", (char *)(next_token->value), next_token->value);
+			printf("Type: string, Value: %s, addr: %p\n",
+			(char *)(next_token->value), next_token->value);
 
 		if (next_token->type == 'i')
-			printf("Type: integer, Value: %d, addr: %p\n", *(int *)(next_token->value), next_token->value);
+			printf("Type: integer, Value: %d, addr: %p\n",
+			*(int *)(next_token->value), next_token->value);
 
 		if (next_token->type == 'd')
-			printf("Type: decimal, Value: %lf, addr: %p\n", *(double *)(next_token->value), next_token->value);
+			printf("Type: decimal, Value: %lf, addr: %p\n",
+			*(double *)(next_token->value), next_token->value);
 
 		next_token = next_token->next;
 	}

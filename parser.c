@@ -13,23 +13,19 @@
  */
 operation *parse_list(Token *head)
 {
-	char *builtins[] = {"exec_shell", "env", NULL};
-	void (*func_builtins[])(char **, int size) = {exec_shell, env};
-
 	Token *next_token = head;
 	operation *head_op = malloc(sizeof(operation));
 	operation *last_op = head_op;
-
-	int idx;
-	int idy;
-
+	int idx = 0, idy;
 	char **temp;
+
+	char *builtins[] = {"exec_shell", "env", NULL};
+
+	void (*func_builtins[])(char **, int size) = {exec_shell, env};
 
 	while (next_token != NULL)
 	{
 		temp = malloc(sizeof(char **) * 256);
-		idx = 0;
-
 		while (1)
 		{
 			temp[idx] = malloc(str_len((char *)next_token->value) + 1);
@@ -38,49 +34,33 @@ operation *parse_list(Token *head)
 			idx++;
 			if (next_token == NULL)
 				break;
-
 		}
-
 		last_op->commands = malloc(sizeof(char **) * (idx + 1));
 		last_op->size = idx;
 		last_op->temp_ptr = temp;
-
 		for (idy = idx; idy < 256; idy++)
 			free(*(temp + idy));
-
-		#ifdef DEBUG
-		printf("size of array: %d\n", idx);
-		#endif
-		
 		for (idy = 0; idy < idx; idy++)
 			last_op->commands[idy] = temp[idy];
-
 		last_op->commands[idy] = NULL;
-
 		for (idy = 0; builtins[idy] != NULL; idy++)
-		{
 			if (str_comp(last_op->commands[0], builtins[idy]))
 				last_op->function = func_builtins[idy];
 			else
 				last_op->function = func_builtins[0];
-		}
-
 		idx = 0;
 		idy = 0;
 		break;
 	}
-
-
 	return (head_op);
 }
-
 
 /**
  * exec_tree - executes tree from head operation
  * @head: start operation
  */
 void exec_tree(operation *head)
-{	
+{
 	/*char **temp = head->temp_ptr;*/
 	/*int idx = 0;*/
 
@@ -91,6 +71,5 @@ void exec_tree(operation *head)
 		head = head->next;
 		free(head);
 	}
-
 	/*free(temp);*/
 }
