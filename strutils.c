@@ -63,11 +63,10 @@ int str_comp(char *str0, char *str1)
 	{
 		if (!(*str0++ == *str1++))
 		{
-			return(0);
+			return (0);
 		}
-		printf("%c == %c\n", *(str0 - 1), *(str1 - 1));
 	}
-	
+
 	return (str_len(s0) == str_len(s1));
 }
 

@@ -8,5 +8,4 @@ int str_exists(char *str, char **str_list);
 int str_len(char *str);
 void str_cpy(char *dest, char *src);
 
-
 #endif

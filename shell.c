@@ -14,7 +14,7 @@
 /**
  * input - gets data from sdtin
  * @buffer: buffer pointer
- * @buffer_size: size of buffer
+ * @show_prompt: size of buffer
  * Return: number of bytes read
  */
 size_t input(char *buffer, int show_prompt)
@@ -34,7 +34,7 @@ size_t input(char *buffer, int show_prompt)
 		idx++;
 		inpt = getchar();
 	}
-	buffer[idx] ='\0';
+	buffer[idx] = '\0';
 
 	return ((size_t)(str_len(buffer)));
 }
@@ -50,35 +50,23 @@ int main(int argv, char **argc __attribute__((unused)))
 	size_t buffer_size = 1024;
 	char *buffer = malloc(buffer_size);
 	size_t b_read;
-	int run = 1;
-
 	Token *token_list = NULL;
-	printf("length = %d", argv);
 
-	while (run)
+	while (1)
 	{
 		b_read = input(buffer, (argv == 1));
-		printf("buffer: %s\n", buffer);
-
 		if ((int)b_read == -1)
 			break;
 
 		if (str_comp(buffer, "exit"))
-		{
 			break;
-			printf("buffer1: %s\n", buffer);
-			run = 0;
-		}
+
 		token_list = make_tokens(buffer);
 
 		if (token_list == NULL)
 			continue;
 		else
 		{
-			#ifdef DEBUG
-			print_tokens(token_list);
-			#endif
-
 			operation *head_op = parse_list(token_list);
 
 			exec_tree(head_op);

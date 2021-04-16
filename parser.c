@@ -50,7 +50,6 @@ operation *parse_list(Token *head)
 				last_op->function = func_builtins[0];
 		idx = 0;
 		idy = 0;
-		break;
 	}
 	return (head_op);
 }

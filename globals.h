@@ -5,9 +5,7 @@
 #define false 0
 
 #include <stddef.h>
-#include<stdio.h>
-
-
+#include <stdio.h>
 
 size_t input(char *buffer, int show_prompt);
 
