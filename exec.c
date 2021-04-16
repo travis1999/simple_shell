@@ -1,8 +1,10 @@
+#define _POSIX_SOURCE
 #include "exec.h"
 #include <stdio.h>
 #include <unistd.h>
 #include <sys/wait.h>
 #include <stdlib.h>
+#include <signal.h>
 
 /**
  * env - env func
@@ -14,23 +16,25 @@ void env(char **args __attribute__((unused)), int size __attribute__((unused)))
 {
 	int i;
 	pid_t child_pid;
-	int return_status;
+    int status;
 
 	child_pid = fork();
+    if (child_pid == -1)
+    {
+        perror("Error:");
+    }
 
 	if (child_pid == 0)
-	{
+    {
 		for (i = 0; environ[i] != NULL; i++)
 			printf("\n%s", environ[i]);
-	}
-	else if (child_pid < 0)
-	{
-		perror("fork");
-	}
+		printf("\n");
+		exit(0);
+    }
 	else
-	{
-		waitpid(child_pid, &return_status, 0);
-	}
+    {
+        wait(&status);
+    }
 }
 
 /**
@@ -42,21 +46,22 @@ void env(char **args __attribute__((unused)), int size __attribute__((unused)))
 void exec_shell(char **args, int size __attribute__((unused)))
 {
 	pid_t child_pid;
-	int return_status;
+    int status;
 
 	child_pid = fork();
+    if (child_pid == -1)
+    {
+        perror("Error:");
+    }
 
 	if (child_pid == 0)
-	{
-		if (execve(args[0], args, NULL) == -1)
+    {
+        if (execve(args[0], args, NULL) == -1)
 			perror("Error");
-	}
-	else if (child_pid < 0)
-	{
-		perror("fork");
-	}
+		exit(0);
+    }
 	else
-	{
-		waitpid(child_pid, &return_status, 0);
-	}
+    {
+        wait(&status);
+    }
 }
