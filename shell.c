@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include "tokenizer.h"
 #include "parser.h"
+#include "strutils.h"
 
 #include <stdlib.h>
 #include <unistd.h>
@@ -16,23 +17,35 @@
  * @buffer_size: size of buffer
  * Return: number of bytes read
  */
-
-size_t input(char **buffer, size_t *buffer_size)
+size_t input(char *buffer, int show_prompt)
 {
 	char *prompt = "($) ";
-	size_t size;
+	int idx = 0;
+	char inpt;
 
-	write(1, prompt, 4);
-	size = getline(buffer, buffer_size, stdin);
+	if (show_prompt)
+		write(1, prompt, 4);
 
-	return (size);
+	inpt = getchar();
+
+	while (inpt != '\n')
+	{
+		buffer[idx] = inpt;
+		idx++;
+		inpt = getchar();
+	}
+	buffer[idx] ='\0';
+
+	return ((size_t)(str_len(buffer)));
 }
 
 /**
  * main - entry point
+ * @argv: number of args
+ * @argc:array of char*
  * Return: Always Zero (Success)
  */
-int main(void)
+int main(int argv, char **argc __attribute__((unused)))
 {
 	size_t buffer_size = 1024;
 	char *buffer = malloc(buffer_size);
@@ -40,18 +53,20 @@ int main(void)
 	int run = 1;
 
 	Token *token_list = NULL;
+	printf("length = %d", argv);
 
 	while (run)
 	{
-		b_read = input(&buffer, &buffer_size);
+		b_read = input(buffer, (argv == 1));
+		printf("buffer: %s\n", buffer);
 
 		if ((int)b_read == -1)
 			break;
 
-		buffer[b_read - 1] = 0;
-		if (!strcmp(buffer, "exit"))
+		if (str_comp(buffer, "exit"))
 		{
 			break;
+			printf("buffer1: %s\n", buffer);
 			run = 0;
 		}
 		token_list = make_tokens(buffer);
